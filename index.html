@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Perspective — Samarth Kulkarni</title>
-<meta name="description" content="Free books, audiobooks, and apps by Samarth Kulkarni.">
+<meta name="description" content="Websites and apps by Samarth Kulkarni.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#161616;
-    --paper:#fafaf8;
-    --mute: rgba(22,22,22,0.42);
-    --hair: rgba(22,22,22,0.14);
+    --ink:#f2f2ee;
+    --page:#0a0a0a;
+    --mute: rgba(242,242,238,0.42);
+    --hair: rgba(242,242,238,0.16);
   }
 
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
@@ -23,115 +23,111 @@
   body{
     height:100dvh;
     width:100vw;
-    background:var(--paper);
+    background:var(--page);
     color:var(--ink);
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
     font-family:'JetBrains Mono', monospace;
   }
 
   @media (prefers-reduced-motion: no-preference){
-    .row, .row::after{ transition: color .3s ease, opacity .3s ease; }
-    .row .arrow{ transition: transform .3s ease, opacity .3s ease; }
+    .row, .num, .arrow{ transition: opacity .3s ease, color .3s ease, transform .3s ease; }
   }
 
   .page{
     width:100%;
     height:100%;
+    max-width:520px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-between;
-    padding: clamp(1rem, 4vh, 2.4rem) clamp(1.2rem, 6vw, 2rem);
+    padding: clamp(1.1rem, 4.5vh, 2.6rem) clamp(1.2rem, 6vw, 1.6rem);
   }
 
   .mark{
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:400;
-    font-size: clamp(0.95rem, 2.2vh, 1.25rem);
-    letter-spacing:0.01em;
+    font-size: clamp(1.1rem, 2.6vh, 1.4rem);
+    letter-spacing:0.02em;
     color:var(--ink);
   }
 
   main{
     flex:1;
     width:100%;
-    max-width:420px;
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap: clamp(1rem, 3.4vh, 1.8rem);
+    gap: clamp(0.9rem, 3vh, 1.6rem);
   }
 
-  .group{
-    display:flex;
-    flex-direction:column;
-    gap: clamp(0.45rem, 1.4vh, 0.7rem);
-  }
-
-  .label{
-    font-size: clamp(0.55rem, 1.1vh, 0.64rem);
-    letter-spacing:0.18em;
+  .kind{
+    font-size: clamp(0.58rem, 1.1vh, 0.66rem);
+    letter-spacing:0.22em;
     text-transform:uppercase;
     color:var(--mute);
-    margin-bottom:clamp(0.1rem,0.6vh,0.3rem);
+    margin-bottom: clamp(0.2rem, 0.8vh, 0.4rem);
+  }
+
+  .rows{
+    border-top:0.5px solid var(--hair);
   }
 
   .row{
     display:flex;
     align-items:baseline;
-    justify-content:space-between;
+    gap:clamp(0.7rem, 2vw, 1rem);
     text-decoration:none;
     color:var(--ink);
-    padding: clamp(0.15rem, 0.6vh, 0.3rem) 0;
+    padding: clamp(0.4rem, 1.5vh, 0.65rem) 0;
+    border-bottom:0.5px solid var(--hair);
+  }
+
+  .num{
+    font-size: clamp(0.6rem, 1.1vh, 0.7rem);
+    color:var(--mute);
+    flex:0 0 auto;
+    font-variant-numeric: tabular-nums;
   }
 
   .row-name{
-    font-size: clamp(0.82rem, 1.9vh, 1rem);
-  }
-
-  .group--content .row-name{
+    flex:1;
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:400;
-    font-size: clamp(0.95rem, 2.2vh, 1.2rem);
+    font-size: clamp(0.92rem, 2vh, 1.1rem);
   }
 
-  .group--tools .row-name{
+  .kind--apps .row-name{
     font-family:'JetBrains Mono', monospace;
+    font-style:normal;
     font-weight:400;
     letter-spacing:-0.01em;
+    font-size: clamp(0.8rem, 1.7vh, 0.95rem);
   }
 
   .arrow{
-    font-size:0.85em;
+    flex:0 0 auto;
+    font-size:0.8em;
     color:var(--mute);
     opacity:0;
     transform:translate(-4px,4px) rotate(45deg);
   }
 
   .row:hover, .row:focus-visible{ color:var(--ink); }
-  .row:hover .row-name, .row:focus-visible .row-name{ opacity:1; }
+  .row:hover .num, .row:focus-visible .num{ color:var(--ink); }
   .row:hover .arrow, .row:focus-visible .arrow{
     opacity:1;
     transform:translate(0,0) rotate(45deg);
   }
-  .row:focus-visible{ outline:1px solid var(--mute); outline-offset:6px; }
-
-  hr.div{
-    width:100%;
-    max-width:420px;
-    border:none;
-    border-top:1px solid var(--hair);
-    margin:0;
-  }
+  .row:focus-visible{ outline:1px solid var(--mute); outline-offset:-2px; }
 
   footer{
-    font-size: clamp(0.56rem, 1.05vh, 0.66rem);
-    letter-spacing:0.08em;
+    font-size: clamp(0.56rem, 1.05vh, 0.64rem);
+    letter-spacing:0.1em;
     text-transform:uppercase;
   }
   footer a{
@@ -141,8 +137,8 @@
   footer a:hover{ color:var(--ink); }
 
   @media (max-height: 480px) and (orientation: landscape){
-    main{ gap: clamp(0.6rem, 2vh, 1rem); }
-    .group{ gap:0.3rem; }
+    main{ gap: clamp(0.5rem, 1.6vh, 0.9rem); }
+    .row{ padding: 0.25rem 0; }
   }
 </style>
 </head>
@@ -152,38 +148,46 @@
   <span class="mark">Perspective</span>
 
   <main>
-    <div class="group group--content">
-      <div class="label">Content — updated monthly</div>
-      <a class="row" href="https://samarthkulkarni16.github.io/perspective-library/" target="_blank" rel="noopener">
-        <span class="row-name">Perspective Library</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="row" href="https://samarthkulkarni16.github.io/perspective-audio/" target="_blank" rel="noopener">
-        <span class="row-name">Perspective Audio</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
+    <div class="kind kind--websites">
+      <div class="label kind">Websites</div>
+      <div class="rows">
+        <a class="row" href="https://samarthkulkarni16.github.io/perspective-library/" target="_blank" rel="noopener">
+          <span class="num">01</span>
+          <span class="row-name">Perspective Library</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row" href="https://samarthkulkarni16.github.io/perspective-audio/" target="_blank" rel="noopener">
+          <span class="num">02</span>
+          <span class="row-name">Perspective Audio</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
 
-    <hr class="div">
-
-    <div class="group group--tools">
-      <div class="label">Tools — free apps</div>
-      <a class="row" href="https://samarthkulkarni16.github.io/notes_app_for_you/" target="_blank" rel="noopener">
-        <span class="row-name">Notes</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="row" href="https://samarthkulkarni16.github.io/logs_app_for_you/" target="_blank" rel="noopener">
-        <span class="row-name">Daily Logs</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="row" href="https://samarthkulkarni16.github.io/To-Do_App_for_you/" target="_blank" rel="noopener">
-        <span class="row-name">To Do</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="row" href="https://samarthkulkarni16.github.io/flow_timer_for_you/" target="_blank" rel="noopener">
-        <span class="row-name">Flow Timer</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
+    <div class="kind kind--apps">
+      <div class="label kind">Apps</div>
+      <div class="rows">
+        <a class="row" href="https://samarthkulkarni16.github.io/notes_app_for_you/" target="_blank" rel="noopener">
+          <span class="num">03</span>
+          <span class="row-name">Notes</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row" href="https://samarthkulkarni16.github.io/logs_app_for_you/" target="_blank" rel="noopener">
+          <span class="num">04</span>
+          <span class="row-name">Daily Logs</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row" href="https://samarthkulkarni16.github.io/To-Do_App_for_you/" target="_blank" rel="noopener">
+          <span class="num">05</span>
+          <span class="row-name">To Do</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row" href="https://samarthkulkarni16.github.io/flow_timer_for_you/" target="_blank" rel="noopener">
+          <span class="num">06</span>
+          <span class="row-name">Flow Timer</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   </main>
 
