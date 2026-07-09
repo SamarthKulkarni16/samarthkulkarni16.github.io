@@ -29,10 +29,8 @@
     width:100vw;
     background:var(--page);
     color:var(--ink);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
     font-family:'JetBrains Mono', monospace;
+    position:relative;
   }
 
   @media (prefers-reduced-motion: no-preference){
@@ -43,14 +41,15 @@
     width:100%;
     height:100%;
     max-width:520px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:space-between;
+    margin:0 auto;
+    position:relative;
     padding: clamp(1.1rem, 4.5vh, 2.6rem) clamp(1.2rem, 6vw, 1.6rem);
   }
 
   .mark{
+    position:absolute;
+    top: clamp(1.1rem, 4.5vh, 2.6rem);
+    left: clamp(1.2rem, 6vw, 1.6rem);
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:400;
@@ -60,8 +59,13 @@
   }
 
   main{
-    flex:1;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     width:100%;
+    max-width:100%;
+    padding: 0 clamp(1.2rem, 6vw, 1.6rem);
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -130,6 +134,10 @@
   .row:focus-visible{ outline:1px solid var(--mute); outline-offset:-2px; }
 
   footer{
+    position:absolute;
+    bottom: clamp(1.1rem, 4.5vh, 2.6rem);
+    left:50%;
+    transform:translateX(-50%);
     font-size: clamp(0.56rem, 1.05vh, 0.64rem);
     letter-spacing:0.1em;
     text-transform:uppercase;
