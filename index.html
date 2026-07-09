@@ -7,260 +7,190 @@
 <meta name="description" content="Free books, audiobooks, and apps by Samarth Kulkarni.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0a0a0a;
+    --ink:#161616;
     --paper:#fafaf8;
-    --line: rgba(255,255,255,0.18);
-    --line-dark: rgba(10,10,10,0.15);
-    --mute-on-dark: rgba(255,255,255,0.5);
-    --mute-on-light: rgba(10,10,10,0.45);
+    --mute: rgba(22,22,22,0.42);
+    --hair: rgba(22,22,22,0.14);
   }
 
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 
-  html,body{
-    height:100%;
-    margin:0;
-    overflow:hidden;
-    background:var(--ink);
-  }
+  html,body{ height:100%; margin:0; overflow:hidden; }
 
   body{
-    font-family:'JetBrains Mono', monospace;
     height:100dvh;
     width:100vw;
+    background:var(--paper);
+    color:var(--ink);
     display:flex;
     flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono', monospace;
   }
 
   @media (prefers-reduced-motion: no-preference){
-    .tile, .tile::after { transition: background-color .35s ease, color .35s ease, border-color .35s ease; }
-    .tile .arrow{ transition: transform .35s ease; }
+    .row, .row::after{ transition: color .3s ease, opacity .3s ease; }
+    .row .arrow{ transition: transform .3s ease, opacity .3s ease; }
   }
 
-  header{
-    flex:0 0 auto;
+  .page{
+    width:100%;
+    height:100%;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:space-between;
-    padding: clamp(0.9rem, 2.4vh, 1.6rem) clamp(1rem, 3vw, 2.2rem);
-    color:#fff;
-    background:var(--ink);
+    padding: clamp(1rem, 4vh, 2.4rem) clamp(1.2rem, 6vw, 2rem);
   }
 
   .mark{
     font-family:'Fraunces', serif;
     font-style:italic;
-    font-weight:500;
-    font-size:clamp(1rem, 2.4vh, 1.4rem);
+    font-weight:400;
+    font-size: clamp(0.95rem, 2.2vh, 1.25rem);
     letter-spacing:0.01em;
-  }
-
-  .tagline{
-    font-size:clamp(0.62rem, 1.3vh, 0.78rem);
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--mute-on-dark);
+    color:var(--ink);
   }
 
   main{
-    flex:1 1 auto;
-    display:flex;
-    min-height:0;
-  }
-
-  .panel{
     flex:1;
+    width:100%;
+    max-width:420px;
     display:flex;
     flex-direction:column;
-    min-height:0;
-    min-width:0;
-    padding: clamp(0.5rem, 1.8vh, 1.2rem) clamp(1rem, 3vw, 2.2rem) clamp(1.2rem, 3vh, 2rem);
+    justify-content:center;
+    gap: clamp(1rem, 3.4vh, 1.8rem);
   }
 
-  .panel--content{
-    background:var(--ink);
-    color:#fff;
-  }
-
-  .panel--tools{
-    background:var(--paper);
-    color:var(--ink);
-  }
-
-  .panel-label{
-    flex:0 0 auto;
-    font-size:clamp(0.6rem, 1.2vh, 0.72rem);
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    margin-bottom: clamp(0.6rem, 2vh, 1.4rem);
-  }
-
-  .panel--content .panel-label{ color:var(--mute-on-dark); }
-  .panel--tools .panel-label{ color:var(--mute-on-light); }
-
-  .grid{
-    flex:1 1 auto;
-    min-height:0;
-    display:grid;
-    gap: clamp(0.5rem, 1.4vh, 0.9rem);
-  }
-
-  .panel--content .grid{
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .panel--tools .grid{
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .tile{
-    position:relative;
+  .group{
     display:flex;
-    align-items:center;
+    flex-direction:column;
+    gap: clamp(0.45rem, 1.4vh, 0.7rem);
+  }
+
+  .label{
+    font-size: clamp(0.55rem, 1.1vh, 0.64rem);
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin-bottom:clamp(0.1rem,0.6vh,0.3rem);
+  }
+
+  .row{
+    display:flex;
+    align-items:baseline;
     justify-content:space-between;
     text-decoration:none;
-    border-radius: 2px;
-    padding: clamp(0.7rem, 2.4vh, 1.4rem) clamp(0.9rem, 2.2vw, 1.6rem);
-    overflow:hidden;
-  }
-
-  .panel--content .tile{
-    border:1px solid var(--line);
-    color:#fff;
-  }
-  .panel--content .tile:hover,
-  .panel--content .tile:focus-visible{
-    background:#fff;
     color:var(--ink);
-    border-color:#fff;
+    padding: clamp(0.15rem, 0.6vh, 0.3rem) 0;
   }
 
-  .panel--tools .tile{
-    border:1px solid var(--line-dark);
-    color:var(--ink);
-  }
-  .panel--tools .tile:hover,
-  .panel--tools .tile:focus-visible{
-    background:var(--ink);
-    color:var(--paper);
-    border-color:var(--ink);
+  .row-name{
+    font-size: clamp(0.82rem, 1.9vh, 1rem);
   }
 
-  .tile:focus-visible{ outline:2px solid currentColor; outline-offset:-4px; }
-
-  .tile-name{
+  .group--content .row-name{
     font-family:'Fraunces', serif;
     font-style:italic;
-    font-weight:500;
-    line-height:1.05;
+    font-weight:400;
+    font-size: clamp(0.95rem, 2.2vh, 1.2rem);
   }
 
-  .panel--content .tile-name{
-    font-size: clamp(1.1rem, 3.6vh, 1.9rem);
-  }
-
-  .panel--tools .tile-name{
+  .group--tools .row-name{
     font-family:'JetBrains Mono', monospace;
-    font-style:normal;
-    font-weight:500;
-    font-size: clamp(0.82rem, 2.2vh, 1.05rem);
+    font-weight:400;
     letter-spacing:-0.01em;
   }
 
   .arrow{
-    flex:0 0 auto;
-    font-size:1.1em;
-    margin-left:0.6em;
-    transform:rotate(45deg);
+    font-size:0.85em;
+    color:var(--mute);
+    opacity:0;
+    transform:translate(-4px,4px) rotate(45deg);
   }
-  .tile:hover .arrow, .tile:focus-visible .arrow{
-    transform:rotate(45deg) translate(15%,-15%);
+
+  .row:hover, .row:focus-visible{ color:var(--ink); }
+  .row:hover .row-name, .row:focus-visible .row-name{ opacity:1; }
+  .row:hover .arrow, .row:focus-visible .arrow{
+    opacity:1;
+    transform:translate(0,0) rotate(45deg);
+  }
+  .row:focus-visible{ outline:1px solid var(--mute); outline-offset:6px; }
+
+  hr.div{
+    width:100%;
+    max-width:420px;
+    border:none;
+    border-top:1px solid var(--hair);
+    margin:0;
   }
 
   footer{
-    flex:0 0 auto;
-    display:flex;
-    justify-content:center;
-    padding: clamp(0.5rem, 1.6vh, 0.9rem) 0;
-    background:var(--paper);
-  }
-
-  footer a{
-    color:var(--mute-on-light);
-    text-decoration:none;
-    font-size:clamp(0.6rem, 1.1vh, 0.72rem);
+    font-size: clamp(0.56rem, 1.05vh, 0.66rem);
     letter-spacing:0.08em;
     text-transform:uppercase;
   }
+  footer a{
+    color:var(--mute);
+    text-decoration:none;
+  }
   footer a:hover{ color:var(--ink); }
 
-  /* Mobile: stack panels, keep single viewport, no scroll */
-  @media (max-width: 720px){
-    main{ flex-direction:column; }
-    .panel--content .grid{ grid-template-columns:repeat(2,1fr); grid-template-rows:1fr; }
-    .panel--tools .grid{ grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,1fr); }
-    .tile{ flex-direction:column; align-items:flex-start; justify-content:space-between; }
-    .arrow{ margin-left:0; align-self:flex-end; }
-  }
-
   @media (max-height: 480px) and (orientation: landscape){
-    header{ padding-top:0.4rem; padding-bottom:0.4rem; }
-    .panel-label{ margin-bottom:0.4rem; }
+    main{ gap: clamp(0.6rem, 2vh, 1rem); }
+    .group{ gap:0.3rem; }
   }
 </style>
 </head>
 <body>
 
-<header>
+<div class="page">
   <span class="mark">Perspective</span>
-  <span class="tagline">Free, every month</span>
-</header>
 
-<main>
-  <section class="panel panel--content" aria-label="Monthly content">
-    <div class="panel-label">Content — updated monthly</div>
-    <div class="grid">
-      <a class="tile" href="https://samarthkulkarni16.github.io/perspective-library/" target="_blank" rel="noopener">
-        <span class="tile-name">Perspective<br>Library</span>
+  <main>
+    <div class="group group--content">
+      <div class="label">Content — updated monthly</div>
+      <a class="row" href="https://samarthkulkarni16.github.io/perspective-library/" target="_blank" rel="noopener">
+        <span class="row-name">Perspective Library</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="tile" href="https://samarthkulkarni16.github.io/perspective-audio/" target="_blank" rel="noopener">
-        <span class="tile-name">Perspective<br>Audio</span>
+      <a class="row" href="https://samarthkulkarni16.github.io/perspective-audio/" target="_blank" rel="noopener">
+        <span class="row-name">Perspective Audio</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
     </div>
-  </section>
 
-  <section class="panel panel--tools" aria-label="Free apps">
-    <div class="panel-label">Tools — free apps</div>
-    <div class="grid">
-      <a class="tile" href="https://samarthkulkarni16.github.io/notes_app_for_you/" target="_blank" rel="noopener">
-        <span class="tile-name">Notes</span>
+    <hr class="div">
+
+    <div class="group group--tools">
+      <div class="label">Tools — free apps</div>
+      <a class="row" href="https://samarthkulkarni16.github.io/notes_app_for_you/" target="_blank" rel="noopener">
+        <span class="row-name">Notes</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="tile" href="https://samarthkulkarni16.github.io/logs_app_for_you/" target="_blank" rel="noopener">
-        <span class="tile-name">Daily Logs</span>
+      <a class="row" href="https://samarthkulkarni16.github.io/logs_app_for_you/" target="_blank" rel="noopener">
+        <span class="row-name">Daily Logs</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="tile" href="https://samarthkulkarni16.github.io/To-Do_App_for_you/" target="_blank" rel="noopener">
-        <span class="tile-name">To Do</span>
+      <a class="row" href="https://samarthkulkarni16.github.io/To-Do_App_for_you/" target="_blank" rel="noopener">
+        <span class="row-name">To Do</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="tile" href="https://samarthkulkarni16.github.io/flow_timer_for_you/" target="_blank" rel="noopener">
-        <span class="tile-name">Flow Timer</span>
+      <a class="row" href="https://samarthkulkarni16.github.io/flow_timer_for_you/" target="_blank" rel="noopener">
+        <span class="row-name">Flow Timer</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
     </div>
-  </section>
-</main>
+  </main>
 
-<footer>
-  <a href="https://github.com/SamarthKulkarni16" target="_blank" rel="noopener">Samarth Kulkarni</a>
-</footer>
+  <footer>
+    <a href="https://github.com/SamarthKulkarni16" target="_blank" rel="noopener">Samarth Kulkarni</a>
+  </footer>
+</div>
 
 </body>
 </html>
